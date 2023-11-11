@@ -509,8 +509,10 @@ int main() {
 	Contract* contractMenu = createContractArray(lengthContracts + 1);
 
 
-	int lengthArrers = 0;
+	int lengthArrers = 2;
 	Arrers* arrersMenu = createArrersArray(lengthArrers+1);
+	arrersMenu[0] = { "Murad", "Nurmammadli", "Azad", 500 };
+	arrersMenu[1] = { "Sherlock", "Holmes", "Arthur", 420 };
 
 
 	saveDataToFile(carMenu, clientMenu, contractMenu, arrersMenu, lengthCars, lengthClients, lengthContracts, lengthArrers);
