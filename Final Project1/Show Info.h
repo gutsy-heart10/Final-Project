@@ -19,7 +19,7 @@ void displayContractInfo(Car& car,Contract& information) {
     cout << "Name:\t\t" << information.name << endl;
     cout << "Surname:\t" << information.surname << endl;
     cout << "Middle name:\t" << information.middleName << endl;
-    cout << "Registration number of car: " << car.registrationNumber << endl;
+    cout << "Registration number of car: " << information.registrationNumber << endl;
     cout << "Days: " << information.rentDays << endl;
     cout << "From " << information.startDay << " to " << information.endDay << endl;
     cout << "Total price: " << information.totalRentalPrice << endl;

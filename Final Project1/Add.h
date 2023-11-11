@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-short currentDebt(Contract* contracts, Client* clients, int lengthContracts, int lengthClients,  char* nameClient,  char* surnameClient,  char* middleNameClient,  char* currentDay);
+short currentDebt(Contract* contracts, Client* clients, Car* cars , int lengthContracts, int lengthClients, int lengthCars , char* nameClient,  char* surnameClient,  char* middleNameClient,  short currentDay);
 Car* addCar(Car* cars, int& length) {
     Car* newCars = createCarArray(length + 1);
     if (newCars) {
@@ -105,11 +105,12 @@ Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* ar
         return contracts;
     }
 
+
     cout << "Enter rental period (in days): ";
     int rentDays;
     cin >> rentDays;
 
-    cout << "Enter the start day (ex 12.02.23):";
+    cout << "Enter the start day (ex 12.02.23): ";
     char startDay[10];
     cin >> startDay;
 
@@ -131,9 +132,10 @@ Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* ar
     strcpy_s(newContract.endDay, sizeof(newContract.endDay), endDay);
 
     newContract.rentDays = rentDays;
-    newContract.totalRentalPrice = rentDays * cars[carChoice - 1].rentalPricePerDay;
+    newContract.totalRentalPrice = rentDays * cars[carChoice-1].rentalPricePerDay;
+    
 
-    short debt = currentDebt(contracts, clients, lengthContracts, lengthClients, newContract.name, newContract.surname, newContract.middleName, newContract.endDay);
+    short debt = currentDebt(contracts, clients, cars, lengthContracts, lengthClients,  lengthCars, newContract.name, newContract.surname, newContract.middleName, newContract.rentDays);
 
     for (int i = 0; i < lengthArrers; i++) {
         if (_stricmp(arrersMenu[i].nameArrer, newContract.name) == 0 &&
@@ -156,13 +158,13 @@ Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* ar
         tmp[i] = contracts[i];
     }
 
-    tmp[lengthContracts] = newContract;
-    lengthContracts++;
 
+    tmp[lengthContracts] = newContract;
     delete[] contracts;
     contracts = tmp;
+    lengthContracts++;
 
     cout << "Contract is added!" << endl;
 
-    return contracts;
+    return tmp;
 }

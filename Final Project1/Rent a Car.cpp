@@ -63,21 +63,32 @@ Client* deleteClient(Client* clients, int& length);
 // Funkciya dlya udalenii vsex dannix
 void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, Arrers* allarrers, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers);
 // Funkciya zadoljnostey klienta
-short currentDebt(Contract* contracts, Client* clients, int lengthContracts, int lengthClients, char* nameClient, char* surnameClient, char* middleNameClient, char* currentDay) {
-	short clientDebt = 0;
-	for (int j = 0; j < lengthContracts; j++) {
-		if (_stricmp(nameClient, contracts[j].name) == 0 &&
-			_stricmp(surnameClient,contracts[j].surname) == 0 &&
-			_stricmp(middleNameClient,contracts[j].middleName) == 0 &&
-			strcmp(currentDay,contracts[j].endDay) <= 0) {
-			clientDebt += contracts[j].totalRentalPrice;
+short currentDebt(Contract* contracts, Client* clients, Car* cars, int lengthContracts, int lengthClients, int lengthCars ,char* name, char* surname, char* middleName, short inputDays) {
+	short calculatedDebt = 0;
+
+	for (int i = 0; i < lengthContracts; ++i) {
+		if (_stricmp(contracts[i].name, name) == 0 && _stricmp(contracts[i].surname, surname) == 0 && _stricmp(contracts[i].middleName, middleName) == 0) {
 			
-			break;
+			int carIndex = -1;
+			for (int j = 0; j < lengthCars; ++j) {
+				if (strcmp(contracts[i].registrationNumber, cars[j].registrationNumber) == 0) {
+					carIndex = j;
+					break;
+				}
+			}
+			if (carIndex != -1) {
+				if (inputDays < contracts[i].rentDays) {
+					calculatedDebt += inputDays * cars[carIndex].rentalPricePerDay;
+				}
+				else {
+					calculatedDebt += contracts[i].totalRentalPrice;
+				}
+			}
 		}
 	}
-	return clientDebt;
-}
 
+	return calculatedDebt;
+}
 // Animaciya Rent A Car
 void displayRentACarAnimation();
 // Animaciya pri vixode iz proqrammi
@@ -163,7 +174,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 			char inputNameArrer[10];
 			char inputSurnameArrer[10];
 			char inputMiddleNameArrer[10];
-			char inputCurrentDay[10];
+			short inputCurrentDay{};
 			short clientDebt = 0;
 			// inputi casesov
 			int caseChoice{};
@@ -409,17 +420,16 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 				cout << "Enter the middle name of the client: ";
 				cin >> inputMiddleNameArrer;
 
-				cout << "Enter the current day (DD.MM.YY): ";
+				cout << "enter for how many days you want to find out the debt ";
 				cin >> inputCurrentDay;
 
-				clientDebt = currentDebt(contractMenu, clientMenu, lengthContracts, lengthClients, inputNameArrer, inputSurnameArrer, inputMiddleNameArrer, inputCurrentDay);
+				clientDebt = currentDebt(contractMenu, clientMenu, carMenu ,lengthContracts, lengthClients, lengthCars, inputNameArrer, inputSurnameArrer, inputMiddleNameArrer, inputCurrentDay);
 				
 				for (int i = 0; i < lengthArrers; i++) {
 					if (_stricmp(arrersMenu[i].nameArrer, inputNameArrer) == 0 &&
 						_stricmp(arrersMenu[i].surnameArrer, inputSurnameArrer) == 0 &&
 						_stricmp(arrersMenu[i].middleNameArrer, inputMiddleNameArrer) == 0) {
 						arrersMenu[i].totalDebt = clientDebt;
-						
 					}
 				}
 				cout << "Client: " << inputNameArrer << " " << inputSurnameArrer << " " << inputMiddleNameArrer << " owes " << clientDebt << " in total." << endl;

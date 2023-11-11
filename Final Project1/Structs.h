@@ -27,7 +27,7 @@ struct Contract {
     char registrationNumber[15];
     char carBrand[100];
     char carModel[100];
-    int rentDays{};
+    short rentDays{};
     char startDay[10];
     char endDay[10];
     short totalRentalPrice{};
