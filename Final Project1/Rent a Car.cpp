@@ -370,9 +370,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,  
 					system("cls");
 					contractMenu = addContract(contractMenu, carMenu, clientMenu, lengthContracts, lengthCars, lengthClients);
 				}
-				saveDataToFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
-				loadDataFromFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
-
+				
 				system("pause");
 				break;
 #pragma endregion
@@ -524,7 +522,9 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,  
 			}
 		}
 		system("cls");
-		
+		saveDataToFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
+		loadDataFromFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
+
 	}
 	
 }
