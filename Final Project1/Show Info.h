@@ -24,4 +24,3 @@ void displayContractInfo(Car& car,Contract& information) {
     cout << "From " << information.startDay << " to " << information.endDay << endl;
     cout << "Total price: " << information.totalRentalPrice << endl;
 }
-

@@ -32,17 +32,3 @@ struct Contract {
     char endDay[10];
     short totalRentalPrice{};
 };
-// struktura zadoljnostey
-struct Arrers
-{
-    char nameArrer[20];
-    char surnameArrer[40];
-    char middleNameArrer[20];
-    short totalDebt{};
-};
-struct Data
-{
-    Car* allcars;
-    Client* allclients;
-    Contract* allcontracts;
-};

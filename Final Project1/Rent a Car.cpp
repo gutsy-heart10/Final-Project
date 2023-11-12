@@ -154,7 +154,6 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,  
 			{
 				choice = 1; // ctobi prodoljit naviqaciyu vniz mi choice = 1 
 			}
-		system("cls");
 		}
 		else if (key == ENTER) {
 			// case1

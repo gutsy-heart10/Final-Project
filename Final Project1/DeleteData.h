@@ -71,7 +71,6 @@ Contract* deleteContract(Contract* deletecontracts, int& lengthContracts) {
 		}
 	}
 	delete[] deletecontracts;
-	//deletecontracts = newContract ;
 	lengthContracts--;
 	cout << "Contract has been deleted!" << endl;
 	return newContract;
@@ -110,18 +109,9 @@ Client* deleteClient(Client* deleteclients, int& lengthClients) {
 
 	lengthClients--;
 	delete[] deleteclients;
-	//deleteclients = newClients;
 	cout << "Client has been deleted!" << endl;
 	return newClients;
 }
-
-Arrers* deleteArrers(Arrers* deleteArrers, int& lengthArrers) {
-	delete[] deleteArrers;
-	lengthArrers = 0;
-	return nullptr;
-}
-
-
 
 void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, int& lengthCars, int& lengthClients, int& lengthContracts) {
 	// udalenniye dannix o mashine

@@ -13,7 +13,3 @@ Contract* createContractArray(int size) {
     Contract* contarcts = new Contract[size];
     return contarcts;
 }
-Arrers* createArrersArray(int size) {
-    Arrers* arrers = new Arrers[size];
-    return arrers;
-}
