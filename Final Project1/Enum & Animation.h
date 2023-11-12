@@ -28,19 +28,25 @@ enum colormenu {
 };
 void displayRentACarAnimation() {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	int backColor = GREEN;
-	int foreColor = WHITE;
+	int backColor = BLACK;
+	int foreColor = YELLOW;
 	WORD wcolor(((backColor & 0x0f) << 4) + (foreColor & 0x0F));
 	SetConsoleTextAttribute(hConsole, wcolor);
 	for (size_t i = 0; i < 1; i++)
 	{
 		WORD wcolor(((backColor & 0x0f) << 4) + (foreColor & 0x0F));
 		SetConsoleTextAttribute(hConsole, wcolor);
-		cout << "\t\t\t\t\t\t &&&&&  &&&&&  &&  &&  &&&&&&     &&&&      &&&&   &&&&  &&&&&" << endl;
-		cout << "\t\t\t\t\t\t &&  &  &&     &&& &&    &&      &&  &&    &&  && &&  && &&  &" << endl;
-		cout << "\t\t\t\t\t\t &&&&&  &&&&&  && &&&    &&      &&&&&&    &&     &&&&&& &&&&&" << endl;
-		cout << "\t\t\t\t\t\t &&  && &&     &&  &&    &&      &&  &&    &&  && &&  && &&  &&" << endl;
-		cout << "\t\t\t\t\t\t &&  && &&&&&  &&  &&    &&      &&  &&     &&&&  &&  && &&  &&" << endl;
+		cout << "\t\t\t\t\t\t\t&&&&&  &&&&&  &&  &&  &&&&&&     &&&&      &&&&   &&&&  &&&&&" << endl;
+		cout << "\t\t\t\t\t\t\t&&  &  &&     &&& &&    &&      &&  &&    &&  && &&  && &&  &" << endl;
+		cout << "\t\t\t\t\t\t\t&&&&&  &&&&&  && &&&    &&      &&&&&&    &&     &&&&&& &&&&&" << endl;
+		cout << "\t\t\t\t\t\t\t&&  && &&     &&  &&    &&      &&  &&    &&  && &&  && &&  &&" << endl;
+		cout << "\t\t\t\t\t\t\t&&  && &&&&&  &&  &&    &&      &&  &&     &&&&  &&  && &&  &&" << endl;
+		cout << '\n';
+		cout << "\t\t\t\t\t\t\t\t\t\t      _____       " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t  ___/__|__\\____ " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t |           |  | " << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t |___\\_____/_|__|" << endl;
+		cout << "\t\t\t\t\t\t\t\t\t\t   (0)     (0)    " << endl;
 
 	}
 }
@@ -49,10 +55,10 @@ void displayExitAnimation()
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int backColor1 = WHITE;
 	int foreColor1 = RED;
-	int backColor2 = RED;
-	int foreColor2 = WHITE;
+
 	WORD wcolor1(((backColor1 & 0x0f) << 4) + (foreColor1 & 0x0F));
-	WORD wcolor2(((backColor2 & 0x0f) << 4) + (foreColor2 & 0x0F));
+	WORD wcolor2(((foreColor1 & 0x0f) << 4) + (backColor1 & 0x0F));
+
 
 	for (int i = 0; i < 15; i++)
 	{
@@ -64,8 +70,17 @@ void displayExitAnimation()
 		{
 			SetConsoleTextAttribute(hConsole, wcolor2);
 		}
-		cout << '\n'<<endl;
-		cout << '\n'<<endl;
+		cout << " $$$$  $$$$$  $$$$$   $$$$  $$$$$$ $$$$$  $$$$$" << endl;
+		cout << "$$  $$ $$  $$ $$     $$  $$   $$   $$     $$  $$" << endl;
+		cout << "$$     $$$$$  $$$$   $$$$$$   $$   $$$$   $$$$$" << endl;
+		cout << "$$  $$ $$  $$ $$     $$  $$   $$   $$     $$  $$" << endl;
+		cout << " $$$$  $$  $$ $$$$$  $$  $$   $$   $$$$$  $$  $$" << endl;
+
+		cout << "$$   $$ $$  $$ $$$$$   $$$$  $$$$$     $$  $$ $$  $$ $$$$$" << endl;
+		cout << "$$$ $$$ $$  $$ $$  $$ $$  $$ $$  $$    $$$ $$ $$  $$ $$  $$" << endl;
+		cout << "$$ $ $$ $$  $$ $$$$$  $$$$$$ $$  $$    $$ $$$ $$  $$ $$$$$" << endl;
+		cout << "$$   $$ $$  $$ $$  $$ $$  $$ $$  $$    $$  $$ $$  $$ $$  $$" << endl;
+		cout << "$$   $$  $$$$  $$  $$ $$  $$ $$$$$     $$  $$  $$$$  $$  $$" << endl;
 		cout << '\n'<<endl;
 		cout << '\n'<<endl;
 		cout << '\n'<<endl;
@@ -73,7 +88,7 @@ void displayExitAnimation()
 		cout << '\n'<<endl;
 		cout << '\n'<<endl;
 		cout << "\t\t\t\t\t\t\t    &&&&   &&&&   &&&&   &&&&     &&&&&  &&  && &&&&&" << endl;
-		cout << "\t\t\t\t\t\t\t   &&     &&  && &&  && &&  &&    &&  &&  &&&&  &&    " << endl;
+		cout << "\t\t\t\t\t\t\t   &&     &&  && &&  && &&  &&    &&  &&  &&&&  &&   " << endl;
 		cout << "\t\t\t\t\t\t\t   && &&& &&  && &&  && &&  &&    &&&&&    &&   &&&&&" << endl;
 		cout << "\t\t\t\t\t\t\t   &&  && &&  && &&  && &&  &&    &&  &&   &&   &&   " << endl;
 		cout << "\t\t\t\t\t\t\t    &&&&   &&&&   &&&&  &&&&&     &&&&&    &&   &&&&&" << endl;
@@ -84,3 +99,8 @@ void displayExitAnimation()
 	SetConsoleTextAttribute(hConsole, wcolor1);
 	exit(0);
 }
+
+
+
+
+

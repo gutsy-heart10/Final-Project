@@ -25,9 +25,3 @@ void displayContractInfo(Car& car,Contract& information) {
     cout << "Total price: " << information.totalRentalPrice << endl;
 }
 
-void displayArrersInfo(Arrers& arrers) {
-    cout << "Name:\t\t" << arrers.nameArrer << endl;
-    cout << "Surname:\t" << arrers.surnameArrer << endl;
-    cout << "Middle name:\t" << arrers.middleNameArrer << endl;
-    cout << "Total debt:\t" << arrers.totalDebt << endl;
-}

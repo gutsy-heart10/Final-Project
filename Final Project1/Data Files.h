@@ -1,28 +1,39 @@
-#pragma once
-#include<iostream>
-using namespace std;
+void saveDataToFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, int& lengthCars, int& lengthClients, int& lengthContracts) {
+	FILE* fileCar;
+	if (fopen_s(&fileCar, "cars_data.dat", "wb") == 0) {
+		fwrite(carMenu, sizeof(Car), lengthCars, fileCar);
+		fclose(fileCar);
+	}
 
-// Funkciya dlya zapisi dannix
-void saveDataToFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, Arrers* arrersMenu, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers) {
-	FILE* file;
-	fopen_s(&file, "rental_cars_data.dat", "wb");
-	if (file != nullptr) {
-		fwrite((char*)carMenu, sizeof(Car), lengthCars, file);
-		fwrite((char*)clientMenu, sizeof(Client), lengthClients, file);
-		fwrite((char*)contractMenu, sizeof(Contract), lengthContracts, file);
-		fwrite((char*)arrersMenu, sizeof(Arrers), lengthArrers, file);
-		fclose(file);
+	FILE* fileClient;
+	if (fopen_s(&fileClient, "clients_data.dat", "wb") == 0) {
+		fwrite(clientMenu, sizeof(Client), lengthClients, fileClient);
+		fclose(fileClient);
+	}
+
+	FILE* fileContract;
+	if (fopen_s(&fileContract, "contracts_data.dat", "wb") == 0) {
+		fwrite(contractMenu, sizeof(Contract), lengthContracts, fileContract);
+		fclose(fileContract);
 	}
 }
-// Funkciya dlya cteniye dannix
-void loadDataFromFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, Arrers* arrersMenu, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers) {
-	FILE* file;
-	fopen_s(&file, "rental_cars_data.dat", "rb");
-	if (file != nullptr) {
-		fread((char*)carMenu, sizeof(Car), lengthCars, file);
-		fread((char*)clientMenu, sizeof(Client), lengthClients, file);
-		fread((char*)contractMenu, sizeof(Contract), lengthContracts, file);
-		fread((char*)arrersMenu, sizeof(Arrers), lengthArrers, file);
-		fclose(file);
+
+void loadDataFromFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, int& lengthCars, int& lengthClients, int& lengthContracts) {
+	FILE* fileCar;
+	if (fopen_s(&fileCar, "cars_data.dat", "rb") == 0) {
+		fread(carMenu, sizeof(Car), lengthCars, fileCar);
+		fclose(fileCar);
+	}
+
+	FILE* fileClient;
+	if (fopen_s(&fileClient, "clients_data.dat", "rb") == 0) {
+		fread(clientMenu, sizeof(Client), lengthClients, fileClient);
+		fclose(fileClient);
+	}
+
+	FILE* fileContract;
+	if (fopen_s(&fileContract, "contracts_data.dat", "rb") == 0) {
+		fread(contractMenu, sizeof(Contract), lengthContracts, fileContract);
+		fclose(fileContract);
 	}
 }

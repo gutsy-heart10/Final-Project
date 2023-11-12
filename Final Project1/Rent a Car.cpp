@@ -33,7 +33,6 @@ void displayClientInfo(Client& information);
 // Funkciya qde xranyatsya infa pro kontrakt
 void displayContractInfo(Car& car, Contract& information);
 
-void displayArrersInfo(Arrers& arrers);
 // Funkciya poiska po brendu mashini
 void searchCarsByBrand(Car* cars, const char* user, int length);
 // Funkciya poiska po cvetu mashini
@@ -54,14 +53,15 @@ Car* addCar(Car* cars, int& length);
 // Funkciya dlya dobavlenii clienta
 Client* addClient(Client* clients, int& length);
 // Funkciya dlya dobavlenii kontrakta
-Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* arrersMenu, int& lengthContracts, int lengthCars, int lengthClients, int& lengthArrers);
+Contract* addContract(Contract* contracts, Car* cars, Client* clients, int& lengthContracts, int lengthCars, int lengthClients);
 
 // Funkciya dlya udalenii mahini
 Car* deleteCar(Car* car, int& length);
 // Funkciya dlya udalenii klienta
 Client* deleteClient(Client* clients, int& length);
 // Funkciya dlya udalenii vsex dannix
-void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, Arrers* allarrers, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers);
+
+void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, int& lengthCars, int& lengthClients, int& lengthContracts);
 // Funkciya zadoljnostey klienta
 short currentDebt(Contract* contracts, Client* clients, Car* cars, int lengthContracts, int lengthClients, int lengthCars ,char* name, char* surname, char* middleName, short inputDays) {
 	short calculatedDebt = 0;
@@ -95,25 +95,26 @@ void displayRentACarAnimation();
 void displayExitAnimation();
 
 // Funkciya dlya zapisi dannix
-void saveDataToFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, Arrers* arrersMenu, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers);
+void saveDataToFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, int& lengthCars, int& lengthClients, int& lengthContracts);
 // Funkciya dlya cteniye dannix
-void loadDataFromFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, Arrers* arrersMenu, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers);
+void loadDataFromFile(Car* carMenu, Client* clientMenu, Contract* contractMenu, int& lengthCars, int& lengthClients, int& lengthContracts);
 // Funkciya menu
-void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Arrers* arrersMenu ,int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers)
+void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,  int& lengthCars, int& lengthClients, int& lengthContracts)
 {
 	int choice=1; // start opciya
 	while (true)
 	{
 		displayRentACarAnimation();
+		cout << '\n';
 		for (int i = 1; i <= 6; i++)
 		{
 			if (i == choice)
 			{
-				cout << "> " << i << ". ";
+				cout <<"\t\t\t\t\t\t\t  " << "> " << i << ". ";
 			}
 			else
 			{
-				cout << "  " << i << ". ";
+				cout << "\t\t\t\t\t\t\t    " << i << ". ";
 			}
 			switch (i) {
 			case 1:
@@ -153,6 +154,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 			{
 				choice = 1; // ctobi prodoljit naviqaciyu vniz mi choice = 1 
 			}
+		system("cls");
 		}
 		else if (key == ENTER) {
 			// case1
@@ -200,10 +202,10 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					system("cls");
 					cout << "Enter the brand of car: ";
 					cin >> inputBrand;
-					bool brandFound = false;  
+					bool brandFound = false;
 					for (int i = 0; i < lengthCars; i++) {
 						if (_stricmp(inputBrand, carMenu[i].carBrand) == 0) {
-							
+
 							displayCarInfo(carMenu[i]);
 							brandFound = true;
 						}
@@ -213,7 +215,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					}
 					system("pause");
 					break;
-					
+
 				}
 
 				else if (caseChoice == 2) {
@@ -233,7 +235,6 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					}
 					system("pause");
 					break;
-					
 				}
 				else if (caseChoice == 3) {
 					system("cls");
@@ -252,7 +253,6 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					}
 					system("pause");
 					break;
-					
 				}
 				else if (caseChoice == 4) {
 					system("cls");
@@ -271,7 +271,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					}
 					system("pause");
 					break;
-					
+
 				}
 				else if (caseChoice == 5) {
 					system("cls");
@@ -287,12 +287,12 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 						if (_stricmp(inputName, clientMenu[i].name) == 0 &&
 							_stricmp(inputSurname, clientMenu[i].surname) == 0 &&
 							_stricmp(inputIMiddleNameClient, clientMenu[i].middleName) == 0) {
-							displayClientInfo(clientMenu[i]); 
+							displayClientInfo(clientMenu[i]);
 							tenantFound = true;
 						}
 					}
 					if (!tenantFound) {
-						cout << "No clients with such a tenant were found." << endl; 
+						cout << "No clients with such a tenant were found." << endl;
 					}
 					system("pause");
 					break;
@@ -305,7 +305,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					cin >> inputContarctSurname;
 					cout << "Enter the middle name of contract: ";
 					cin >> inputMiddleName;
-					
+
 					bool contractFound = false;
 					for (int i = 0; i < lengthContracts; i++) {
 						if (_stricmp(inputContarctName, contractMenu[i].name) == 0 &&
@@ -330,23 +330,23 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					cin >> end_range;
 					system("cls");
 
-					bool found = false; 
+					bool found = false;
 
 					for (int i = 0; i < lengthCars; i++) {
 						if (carMenu[i].rentalPricePerDay >= start_range && carMenu[i].rentalPricePerDay <= end_range) {
 							cout << "Car " << i + 1 << " information" << endl;
 							displayCarInfo(carMenu[i]);
-							found = true; 
+							found = true;
 						}
 					}
 
 					if (!found) {
-						cout << "No results found in the specified price range." << endl; 
+						cout << "No results found in the specified price range." << endl;
 					}
 				}
 
 				system("pause");
-				
+
 				break;
 
 #pragma endregion
@@ -369,8 +369,11 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 				}
 				else if (case2Search == 3) {
 					system("cls");
-					contractMenu = addContract(contractMenu, carMenu, clientMenu,arrersMenu, lengthContracts, lengthCars, lengthClients, lengthArrers);
+					contractMenu = addContract(contractMenu, carMenu, clientMenu, lengthContracts, lengthCars, lengthClients);
 				}
+				saveDataToFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
+				loadDataFromFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
+
 				system("pause");
 				break;
 #pragma endregion
@@ -385,27 +388,66 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 				cin >> case3Search;
 
 				if (case3Search == 1) {
+					char confirm1{};
 					system("cls");
-					carMenu = deleteCar(carMenu, lengthCars);
+					cout << "Are you sure you want to delete a car? (y/n): ";
+					cin >> confirm1;
+					if (confirm1 == 'y' || confirm1 == 'Y') {
+						carMenu = deleteCar(carMenu, lengthCars);
+					}
+					else {
+						cout << "Deletion canceled." << endl;
+					}
+					system("pause");
+					break;
 				}
 				else if (case3Search == 2) {
+					char confirm2{};
 					system("cls");
-					clientMenu = deleteClient(clientMenu, lengthClients);
+					cout << "Are you sure you want to delete a client? (y/n): ";
+					cin >> confirm2;
+					if (confirm2 == 'y' || confirm2 == 'Y') {
+						clientMenu = deleteClient(clientMenu, lengthClients);
+					}
+					else {
+						cout << "Deletion canceled." << endl;
+					}
+					system("pause");
+					break;
 				}
-				else if (case3Search == 3)
-				{
+				else if (case3Search == 3) {
+					char confirm3{};
 					system("cls");
-					contractMenu = deleteContract(contractMenu, lengthContracts);
+					cout << "Are you sure you want to delete a contract? (y/n): ";
+					cin >> confirm3;
+					if (confirm3 == 'y' || confirm3 == 'Y') {
+						contractMenu = deleteContract(contractMenu, lengthContracts);
+					}
+					else {
+						cout << "Deletion canceled." << endl;
+					}
+					system("pause");
+					break;
 				}
+
 				else if (case3Search == 4) {
 					system("cls");
-					lengthCars = 0;
-					lengthClients = 0;
-					lengthContracts = 0;
-					deleteAllData(carMenu, clientMenu, contractMenu,arrersMenu ,lengthCars, lengthClients, lengthContracts, lengthArrers);
+					cout << "Are you sure you want to delete all information? (y/n): ";
+					char confirm4{};
+					cin >> confirm4;
+					if (confirm4 == 'y' || confirm4 == 'Y') {
+						lengthCars = 0;
+						lengthClients = 0;
+						lengthContracts = 0;
+						deleteAllData(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
+						
+					}
+					else {
+						cout << "Deletion canceled. All data is preserved." << endl;
+					}
+					system("pause");
+					break;
 				}
-				system("pause");
-				break;
 
 #pragma endregion
 #pragma region case4
@@ -425,14 +467,15 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 
 				clientDebt = currentDebt(contractMenu, clientMenu, carMenu ,lengthContracts, lengthClients, lengthCars, inputNameArrer, inputSurnameArrer, inputMiddleNameArrer, inputCurrentDay);
 				
-				for (int i = 0; i < lengthArrers; i++) {
-					if (_stricmp(arrersMenu[i].nameArrer, inputNameArrer) == 0 &&
-						_stricmp(arrersMenu[i].surnameArrer, inputSurnameArrer) == 0 &&
-						_stricmp(arrersMenu[i].middleNameArrer, inputMiddleNameArrer) == 0) {
-						arrersMenu[i].totalDebt = clientDebt;
+				for (int i = 0; i < lengthContracts; i++) {
+					if (_stricmp(contractMenu[i].name, inputNameArrer) == 0 &&
+						_stricmp(contractMenu[i].surname, inputSurnameArrer) == 0 &&
+						_stricmp(contractMenu[i].middleName, inputMiddleNameArrer) == 0) {
+						contractMenu[i].totalRentalPrice = clientDebt;
 					}
+					cout << "Client: " << inputNameArrer << " " << inputSurnameArrer << " " << inputMiddleNameArrer << " owes " << clientDebt << " in total." << endl;
+					break;
 				}
-				cout << "Client: " << inputNameArrer << " " << inputSurnameArrer << " " << inputMiddleNameArrer << " owes " << clientDebt << " in total." << endl;
 				
 				system("pause");
 				break;
@@ -468,12 +511,7 @@ void displayMainMenu(Car* carMenu, Client* clientMenu, Contract* contractMenu,Ar
 					cout << "#############################" << endl;
 					cout << '\n';
 				}
-				for (int i = 0; i < lengthArrers; i++)
-				{
-					cout << "Arrers " << i + 1 << endl;
-					displayArrersInfo(arrersMenu[i]);
-					cout << "--------------------------" << endl;
-				}
+				
 				system("pause");
 				break;
 
@@ -506,7 +544,7 @@ int main() {
 	carMenu[1] = { "Mitsubishi", "Pajero", "White", "90-XX-956", 2008, 3.0f, 70 };
 	carMenu[2] = { "Mercedes", "E-350", "Silver", "50-XX-111", 2009, 3.5f, 60 };
 	carMenu[3] = { "Audi", "Q8", "Green", "99-XX-596", 2021, 3.0f, 90 };
-	carMenu[4] = { "Ford", "Fusion", "Blue", "90BG579", 2007, 1.4f, 40 };
+	carMenu[4] = { "Ford", "Fusion", "Blue", "90-BG-579", 2007, 1.4f, 40 };
 	
 	
 	int lengthClients = 2;
@@ -519,20 +557,16 @@ int main() {
 	Contract* contractMenu = createContractArray(lengthContracts + 1);
 
 
-	int lengthArrers = 2;
-	Arrers* arrersMenu = createArrersArray(lengthArrers+1);
-	arrersMenu[0] = { "Murad", "Nurmammadli", "Azad", 500 };
-	arrersMenu[1] = { "Sherlock", "Holmes", "Arthur", 420 };
+	
 
+	saveDataToFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
+	loadDataFromFile(carMenu, clientMenu, contractMenu, lengthCars, lengthClients, lengthContracts);
 
-	saveDataToFile(carMenu, clientMenu, contractMenu, arrersMenu, lengthCars, lengthClients, lengthContracts, lengthArrers);
-	loadDataFromFile(carMenu, clientMenu, contractMenu, arrersMenu, lengthCars, lengthClients, lengthContracts, lengthArrers);
-
-	displayMainMenu(carMenu, clientMenu, contractMenu, arrersMenu,lengthCars, lengthClients, lengthContracts, lengthArrers);
+	displayMainMenu(carMenu, clientMenu, contractMenu,lengthCars, lengthClients, lengthContracts);
 
 	delete[] carMenu;
 	delete[] clientMenu;
 	delete[] contractMenu;
-	delete[] arrersMenu;
+
 	return 0;
 }

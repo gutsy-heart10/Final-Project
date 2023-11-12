@@ -122,7 +122,8 @@ Arrers* deleteArrers(Arrers* deleteArrers, int& lengthArrers) {
 }
 
 
-void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, Arrers* allarrers, int& lengthCars, int& lengthClients, int& lengthContracts, int& lengthArrers) {
+
+void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, int& lengthCars, int& lengthClients, int& lengthContracts) {
 	// udalenniye dannix o mashine
 	for (int i = 0; i < lengthCars; i++) {
 		delete[] allcars[i].carBrand;
@@ -150,12 +151,10 @@ void deleteAllData(Car* allcars, Client* allclients, Contract* allcontracts, Arr
 		delete[] allcontracts[i].registrationNumber;
 	}
 	delete[] allcontracts;
-	// udaleniye dannix o zadoljnikov
-	deleteArrers(allarrers, lengthArrers);
+	
 	// sbros dlin massivov na 0
 	lengthCars = 0;
 	lengthClients = 0;
 	lengthContracts = 0;
-	lengthArrers = 0;
 	cout << "\t\t\t\t\t\t\t All data is deleted!" << endl;
 }

@@ -58,7 +58,7 @@ Client* addClient(Client* clients, int& length) {
     }
 }
 
-Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* arrersMenu ,int& lengthContracts, int lengthCars, int lengthClients, int& lengthArrers) {
+Contract* addContract(Contract* contracts, Car* cars, Client* clients,int& lengthContracts, int lengthCars, int lengthClients) {
     if (lengthClients == 0) {
         cout << "No clients available. Please add clients first." << endl;
         return contracts;
@@ -93,6 +93,7 @@ Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* ar
         cout << "Brand: " << cars[i].carBrand << endl;
         cout << "Model: " << cars[i].carModel << endl;
         cout << "Registration Number: " << cars[i].registrationNumber << endl;
+        cout << "Rental price per day: " << cars[i].rentalPricePerDay<<" $" << endl;
         cout << "--------------------------" << endl;
     }
 
@@ -137,20 +138,16 @@ Contract* addContract(Contract* contracts, Car* cars, Client* clients,Arrers* ar
 
     short debt = currentDebt(contracts, clients, cars, lengthContracts, lengthClients,  lengthCars, newContract.name, newContract.surname, newContract.middleName, newContract.rentDays);
 
-    for (int i = 0; i < lengthArrers; i++) {
-        if (_stricmp(arrersMenu[i].nameArrer, newContract.name) == 0 &&
-            _stricmp(arrersMenu[i].surnameArrer, newContract.surname) == 0 &&
-            _stricmp(arrersMenu[i].middleNameArrer, newContract.middleName) == 0) {
-            arrersMenu[i].totalDebt = debt;
-            break;
-        }
-    }
+
     system("cls");
     // Vivid dobavlennoqo klienta
     cout << "Added Contract:" << endl;
     cout << "Name: " << newContract.name << endl;
     cout << "Surname: " << newContract.surname << endl;
     cout << "Middle name: " << newContract.middleName << endl;
+    cout << "Car brand: " << newContract.carBrand << endl;
+    cout << "Car model: " << newContract.carModel << endl;
+    cout << "Registration number: " << newContract.registrationNumber << endl;
     cout << "--------------------------" << endl;
 
     Contract* tmp = new Contract[lengthContracts + 1];

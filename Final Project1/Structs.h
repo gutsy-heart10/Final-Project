@@ -40,3 +40,9 @@ struct Arrers
     char middleNameArrer[20];
     short totalDebt{};
 };
+struct Data
+{
+    Car* allcars;
+    Client* allclients;
+    Contract* allcontracts;
+};
