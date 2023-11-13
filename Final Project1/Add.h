@@ -4,7 +4,7 @@ using namespace std;
 
 short currentDebt(Contract* contracts, Client* clients, Car* cars , int lengthContracts, int lengthClients, int lengthCars , char* nameClient,  char* surnameClient,  char* middleNameClient,  short currentDay);
 Car* addCar(Car* cars, int& length) {
-    Car* newCars = createCarArray(length + 1);
+    Car* newCars = createCarArray(length+1);
     if (newCars) {
         cout << "Enter the car brand: ";
         cin >> newCars[length].carBrand;

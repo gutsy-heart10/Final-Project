@@ -8,9 +8,9 @@ struct Car
     char carModel[20];
     char color[15];
     char registrationNumber[15];
-    short yearOfProduction{};
-    float engineCar{};
-    short rentalPricePerDay{};
+    int yearOfProduction{};
+    double engineCar{};
+    int rentalPricePerDay{};
 };
 // struktura klienta
 struct Client
